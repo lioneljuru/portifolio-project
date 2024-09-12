@@ -1,11 +1,18 @@
 import { User } from '../models/userSchema.js';
 
+export const getUserFromSession = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    return res.status(401).json({error: "Unauthorised"})
+  }
+}
+
 
 export const resolveUserId = async(req, res, next) => {
-  console.log(req.params);
-  const { params: {id} } = req;
-  const user = await User.findById(id);
-  if (!user) return res.status(401).send("Bad request");
-  request.user = user;
+  const { user } = req;
+  const eUser = await User.findById(user.id);
+  if (!eUser) return res.status(401).send("Bad request");
+  req.user = eUser;
   next();
 }

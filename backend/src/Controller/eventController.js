@@ -1,7 +1,14 @@
 import { Event } from '../models/Event.js';
 
 export const createEvent = async (req, res) => {
-	const { title, description, date } = req.body;
+	const { eventName,
+					eventTime,
+					startTime,
+					endTime,
+					isAllDay,
+					isPriority
+	 } = req.body;
+
 	try {
 		const event = new Event({
 			eventName,
@@ -22,7 +29,7 @@ export const createEvent = async (req, res) => {
 
 export const getEvents = async (req, res) => {
 	try {
-		const events = await Event.find().populate('createdBy', ['name', 'email']);
+		const events = await Event.find().populate('createdBy', ['firstname', 'email']);
 		res.json(events);
 	} catch (err) {
 		console.error(err.message);
@@ -32,7 +39,7 @@ export const getEvents = async (req, res) => {
 
 export const getEventById = async (req, res) => {
 	try {
-		const event = await Event.findById(req.params.id).populate('creadedBy', ['name', 'email']);
+		const event = await Event.findById(req.params.id).populate('createdBy', ['firstname', 'email']);
 		if (!event) return res.status(404).json({ msg: 'Event Not Found' });
 		res.json(event);
 	} catch (err) {
@@ -42,7 +49,13 @@ export const getEventById = async (req, res) => {
 };
 
 export const updateEvent = async (req, res) => {
-	const { title, description, date } = req.body;
+	const { eventName,
+		eventTime,
+		startTime,
+		endTime,
+		isAllDay,
+		isPriority
+} = req.body;
 	try {
 		let event = await Event.findById(req.params.id);
 		if (!event) return res.status(404).json({ msg: 'Event Not Found' });
@@ -51,7 +64,12 @@ export const updateEvent = async (req, res) => {
 			return res.status(401).json({ msg: 'User Not Authorized' });
 		}
 
-		event = await Event.findByIdAndUpdate(req.params.id, { $set: { title, description, date } }, { new: true });
+		event = await Event.findByIdAndUpdate(req.params.id, { $set: { eventName,
+																																   eventTime,
+																																	 startTime,
+																																	 endTime,
+																																	 isAllDay,
+																																	 isPriority } }, { new: true });
 		res.json(event);
 	} catch (err) {
 		console.error(err.message);
