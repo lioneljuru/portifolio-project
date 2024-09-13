@@ -3,16 +3,18 @@ import { Event } from '../models/Event.js';
 export const createEvent = async (req, res) => {
   const { eventName,
          eventTime,
+         description,
          startTime,
          endTime,
          isAllDay,
          isPriority,
          invitedUsers
         } = req.body;
-  
+
   try {
     const event = new Event({
       eventName,
+      description,
       eventTime,
       startTime,
       endTime,
@@ -22,10 +24,10 @@ export const createEvent = async (req, res) => {
       invitedUsers
     });
     await event.save();
-    res.json(event);
+    res.status(201).json(event);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(400).json({error: `${err}`});
   }
 };
 
@@ -62,11 +64,11 @@ export const updateEvent = async (req, res) => {
   try {
     let event = await Event.findById(req.params.id);
     if (!event) return res.status(404).json({ msg: 'Event Not Found' });
-    
+
     if (event.createdBy.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'User Not Authorized' });
     }
-    
+
     const updatedEvent = {
       eventName,
       eventTime,
@@ -76,7 +78,7 @@ export const updateEvent = async (req, res) => {
       isPriority,
       invitedUsers
     };
-    
+
     event = await Event.findByIdAndUpdate(req.params.id, { $set: updatedEvent }, { new: true });
     res.json(event);
   } catch (err) {
@@ -89,11 +91,11 @@ export const deleteEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     if (!event) return res.status(404).json({ msg: 'Event Not Found' });
-    
+
     if (event.createdBy.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'User Not Authorized' });
     }
-    
+
     await event.remove();
     res.json({ msg: 'Event Removed' });
   } catch (err) {
