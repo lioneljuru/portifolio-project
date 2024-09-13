@@ -24,13 +24,22 @@ export const EventProvider = ({ children }) => {
     }
   }, [eventData]);
 
-
-
+  // CRUD operations
   // Function to create a new event
   const createEvent = (newEvent) => {
     // Here, you'd typically make an API call to store the event in a backend
     // For now, we'll just update the local state
     setEventData((prevEvents) => [...prevEvents, newEvent]);
+  };
+
+  const updateEvent = (updatedEvent) => {
+    setEventData((prevEvents) =>
+      prevEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event)
+    );
+  };
+
+  const deleteEvent = (eventId) => {
+    setEventData((prevEvents) => prevEvents.filter(event => event.id !== eventId));
   };
 
   // Function to fetch events (mocked for now)
@@ -58,7 +67,7 @@ export const EventProvider = ({ children }) => {
   };
 
   return (
-    <EventContext.Provider value={{ eventData, createEvent, fetchEvents }}>
+    <EventContext.Provider value={{ eventData, createEvent, fetchEvents, updateEvent, deleteEvent }}>
       {children}
     </EventContext.Provider>
   )
