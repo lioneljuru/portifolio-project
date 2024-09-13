@@ -112,7 +112,7 @@
 </details>
 ---------------------------------------------------------------------------------------------------------
 <details close>
-<summary>**Endpoint**: `POST /auth/logout`</summary>
+<summary><b>Endpoint</b>: <code>POST /auth/logout<code></summary>
 <br>
 
 **Description**: Logs out user and destroys the session
