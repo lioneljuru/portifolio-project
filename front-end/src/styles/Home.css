@@ -1,0 +1,83 @@
+/* src/styles/Home.css */
+.home {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #e5e1f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.searchBtn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+li:hover {
+    transform: translateY(-5px);
+}
+
+li h3 {
+    margin: 0 0 10px;
+    color: #007BFF;
+}
+
+li p {
+    margin: 5px 0;
+    color: #555;
+}
+
+li p:first-of-type {
+    font-weight: bold;
+}
+
+li p:last-of-type {
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .home {
+        padding: 10px;
+    }
+
+    .searchBtn {
+        font-size: 14px;
+    }
+
+    li {
+        padding: 10px;
+    }
+
+    li h3 {
+        font-size: 18px;
+    }
+
+    li p {
+        font-size: 14px;
+    }
+}
