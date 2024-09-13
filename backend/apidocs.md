@@ -51,7 +51,7 @@
     }
 ```
 </details>
--------------------------------------------------------------------------------------------------------------
+
 <details close>
 <summary><b>Endpoint</b>: <code>POST /auth/signup</code></summary>
 <br>
@@ -110,7 +110,6 @@
 
 ```
 </details>
----------------------------------------------------------------------------------------------------------
 <details close>
 <summary><b>Endpoint</b>: <code>POST /auth/logout</code></summary>
 <br>
