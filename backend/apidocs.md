@@ -4,9 +4,12 @@
 ## Auth Endpoints
 
 *Endpoint* `POST /auth`
+
 *Descripion*: Log in user
+
 *Headers*:
     * `content-type`: application/json
+
 *Request Body*:
     ```
     {
@@ -14,6 +17,7 @@
       "password": "max1234"
     }
     ```
+
 *Success Response*:
   * Code: 200 Ok
   * Content-example:
@@ -30,9 +34,10 @@
               }
       }
       ```
+
 *Error Response*:
-* Code: 401
-* Content Example:
+  * Code: 401
+  * Content Example:
     ```
     {
       "error": "User Not Found"
