@@ -8,12 +8,12 @@
 *Descripion*: Log in user
 
 *Headers*:
-    * `content-type`: application/json
+     `content-type`: application/json
 
 *Request Body*:
     ```
     {
-      "email": "maxwell12@gmail.com"
+      "email": "maxwell12@gmail.com",
       "password": "max1234"
     }
     ```
