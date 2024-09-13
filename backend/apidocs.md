@@ -3,11 +3,8 @@
 
 ## Auth Endpoints
 ---------------------------------------------------------------------------------------
-<details open>
-<summary>
-
-**Endpoint**: `POST /auth`
-</summary>
+<details close>
+<summary>**Endpoint**: `POST /auth`</summary>
 <br>
 
 **Descripion**: Log in user
@@ -55,11 +52,8 @@
     ```
 </details>
 -------------------------------------------------------------------------------------------------------------
-<details open>
-<summary>
-
-**Endpoint**: `POST /auth/signup`
-</summary>
+<details close>
+<summary>**Endpoint**: `POST /auth/signup`</summary>
 <br>
 
 **Descripion**: Create a user Object
@@ -118,10 +112,7 @@
 </details>
 ---------------------------------------------------------------------------------------------------------
 <details close>
-<summary>
-
-**Endpoint**: `POST /auth/logout`
-</summary>
+<summary>**Endpoint**: `POST /auth/logout`</summary>
 <br>
 
 **Description**: Logs out user and destroys the session
