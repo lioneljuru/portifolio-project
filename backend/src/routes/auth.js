@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { resolveUserId } from "../middleware/validation.js";
 import passport from "passport";
 import AuthController from "../Controller/AuthController.js";
 
@@ -16,9 +15,15 @@ router.post('/auth', (req, res, next ) => {
     }
     req.logIn(user, (err) => {
   if (err) {
-    return res.status(500).json({ error: 'Login failed.' }); // Login failure (server-side)
+    return res.status(500).json({ error: 'Login failed.' });
   }
-  return res.json({ message: 'Login successful!', user });
+  const loggedUser = {
+    id: user._id,
+    name: `${user.firstname} ${user.lastname}`,
+    email: user.email,
+    dob: user.dob
+  }
+  return res.json({ message: 'Login successful!', loggedUser});
 });
 })(req, res, next);
 });
