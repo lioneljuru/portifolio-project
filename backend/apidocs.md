@@ -93,15 +93,15 @@
   * `Code`: 400 `Bad Request`,
   * `Content Example`:
     - This occurs when nothing is passed to the url or request body is empty
-    ```
+  ```
     {
       "error": "Bad Request"
     }
-    ```
+  ```
   * `Code`: 403 `Forbidden`
   * `Content Example`:
     - This error occurs when the email already exist, because email address is unique
-    ```
+  ```
     {
       "error": "Email Exist"
     }
