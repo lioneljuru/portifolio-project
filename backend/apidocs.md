@@ -105,15 +105,16 @@
     {
       "error": "Email Exist"
     }
-    ```
+  ```
   * `Code`: 422 `Unprocessible entity`
   * `Content Example`:
-  - This occurs when some necessary fields are empty when request is passed
+  - This occurs when some necessary fields are empty when request is passed:
   ```
     {
       "error": "please fill all necessary fields"
     }
-    ```
+
+  ```
 </details>
 ---------------------------------------------------------------------------------------------------------
 <details open>
