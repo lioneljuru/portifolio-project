@@ -7,9 +7,8 @@ export default class AuthController {
   }
 
   static loginUser(req, res) {
-    const user = req.user;
-    return res.status(200).send({user});
-
+      const user = req.user;
+      return res.status(200).json({user});
   }
 
   static logout (req, res) {
