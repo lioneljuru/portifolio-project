@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import '../styles/Signup.css';
 
 export default function Signup() {
   const [formValues, setFormValues] = useState({

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { EventContext } from "../context/EventContext";
+import '../styles/CreateEvent.css';
 
 function CreateEvent() {
   const { createEvent } = useContext(EventContext);
@@ -28,9 +29,9 @@ function CreateEvent() {
   };
 
   return (
-    <div className="event-form">
+    <div className="event-form-container">
       <h2 className="createEventTitle">Create Event</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="event-form">
         <label htmlFor='name'>Event Name</label>
         <input
           id="name"

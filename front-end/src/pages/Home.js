@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { EventContext } from '../context/EventContext';
+import '../styles/Home.css';
 
 function Home() {
   const { eventData } = useContext(EventContext);
@@ -16,7 +17,7 @@ function Home() {
   return (
     <div className="home">
       <h2>Upcoming Events</h2>
-      <input id='searchEvent' name='searchEvent' type="text" placeholder="Search Events" value={searchQuery} onChange={handleSearch} />
+      <input id='searchEvent' name='searchEvent' type="text" placeholder="Search Events" value={searchQuery} onChange={handleSearch} className='searchBtn' />
       <ul>
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event, index) => (
