@@ -6,6 +6,9 @@ export const createRSVP = async (req, res) => {
 		const event = await Event.findById(req.params.id);
 		if (!event) return res.status(404).json({ msg: 'Event Not Found' });
 
+		if (!event.inveitedUsers.includes(req.user.id)) {
+			return res.status(403).json({ msg: 'You are not allowed to RSVP to this event' });
+
 		const rsvp = new RSVP({
 			event: req.params.id,
 			user: req.user.id

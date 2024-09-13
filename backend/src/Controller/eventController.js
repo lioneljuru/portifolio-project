@@ -2,12 +2,13 @@ import { Event } from '../models/Event.js';
 
 export const createEvent = async (req, res) => {
 	const { eventName,
-					eventTime,
-					startTime,
-					endTime,
-					isAllDay,
-					isPriority
-	 } = req.body;
+		eventTime,
+		startTime,
+		endTime,
+		isAllDay,
+		isPriority,
+		invitedUsers
+	} = req.body;
 
 	try {
 		const event = new Event({
@@ -17,7 +18,8 @@ export const createEvent = async (req, res) => {
 			endTime,
 			isAllDay,
 			isPriority,
-			createdBy: req.user.id
+			createdBy: req.user.id,
+			invitedUsers
 		});
 		await event.save();
 		res.json(event);
@@ -53,9 +55,10 @@ export const updateEvent = async (req, res) => {
 		eventTime,
 		startTime,
 		endTime,
-		isAllDay,
-		isPriority
-} = req.body;
+		isAllday,
+		isPriority,
+		invitedUsers
+	} = req.body;
 	try {
 		let event = await Event.findById(req.params.id);
 		if (!event) return res.status(404).json({ msg: 'Event Not Found' });
@@ -64,12 +67,17 @@ export const updateEvent = async (req, res) => {
 			return res.status(401).json({ msg: 'User Not Authorized' });
 		}
 
-		event = await Event.findByIdAndUpdate(req.params.id, { $set: { eventName,
-																																   eventTime,
-																																	 startTime,
-																																	 endTime,
-																																	 isAllDay,
-																																	 isPriority } }, { new: true });
+		const updatedEvent = {
+			eventName,
+			eventTime,
+			startTime,
+			endTime,
+			isAllDay,
+			isPriority,
+			invitedUsers
+		};
+
+		event = await Event.findByIdAndUpdate(req.params.id, { $set: updatedEvent }, { new: true });
 		res.json(event);
 	} catch (err) {
 		console.error(err.message);

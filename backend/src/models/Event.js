@@ -8,6 +8,7 @@ const EventSchema = new mongoose.Schema({
 	isAllDay: { type: Boolean, default: false },
 	isPriority: { type: Boolean, default: false},
 	createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+	invitedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 	dateCreated: { type: Date, default: Date.now }
 });
 
