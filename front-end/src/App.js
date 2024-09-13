@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //👇🏻 component
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from './pages/Home'; // Event Viewing and filtering
@@ -32,6 +33,7 @@ export default function App() {
               <Route path="/calendar" element={<PrivateRoute><CalendarPage /></PrivateRoute>} />
               <Route path="/create-event" element={<PrivateRoute><CreateEvent /></PrivateRoute>} />
             </Routes>
+            <Footer />
             <ToastContainer />
           </EventProvider>
         </AuthProvider>
