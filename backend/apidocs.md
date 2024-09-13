@@ -64,8 +64,11 @@
 **Request Body**:
 ```
     {
-      "email": "anthonymax",
-      "password": "anto1234"
+      "email": "johndoe@gmail.com",
+      "firstname": "john",
+      "lastname": "doe",
+      "dob": "2006-06-12"
+      "password": "john1234"
     }
 ```
 
@@ -78,7 +81,7 @@
           "id": "66e49c732d2925584e8a8e7b",
           "name": "john doe",
           "email": "johndoe@gmail.com",
-          "dob": "1/01/1999"
+          "dob": "2006-06-12"
           }
       }
 ```
