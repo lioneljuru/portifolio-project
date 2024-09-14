@@ -11,12 +11,12 @@ router.post('/events', getUserFromSession, createEvent);
 router.get('/events', getEvents);
 
 // Get a precise event using it's id
-router.get('/events/:id', getEventById);
+router.get('/events/:id', getUserFromSession, getEventById);
 
 // Updates an already existing event
-router.put('/events/:id', resolveUserId, updateEvent);
+router.put('/events/:id', getUserFromSession, resolveUserId, updateEvent);
 
 // Deletes an event
-router.delete('/events/:id', resolveUserId, deleteEvent);
+router.delete('/events/:id', getUserFromSession, resolveUserId, deleteEvent);
 
 export {router};
