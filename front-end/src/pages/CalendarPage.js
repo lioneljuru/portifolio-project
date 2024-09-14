@@ -7,7 +7,7 @@ import listPlugin from '@fullcalendar/list';
 
 export default function CalendarPage() {
   const [events, setEvents] = useState([
-    { title: 'Event 1', start: '2024-09-01', end: '2024-09-03' },
+    { title: 'Event 1', start: '2024-09-13T10:00:00', end: '2024-09-13T13:00:00' },
     { title: 'Event 2', start: '2024-09-07', end: '2024-09-10' },
     { title: 'Event 3', start: '2024-09-18', end: '2024-09-20' },
     { title: 'Event 4', start: '2024-09-24', end: '2024-09-27' },
