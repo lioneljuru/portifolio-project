@@ -1,14 +1,14 @@
 import express from 'express';
-import { resolveUserId, getUserFromSession } from '../middleware/validation.js';
+import { resolveUserId, getUserFromSession, valInvite} from '../middleware/validation.js';
 import { createEvent, getEvents, getEventById, updateEvent, deleteEvent } from '../Controller/eventController.js';
 
 const router = express.Router();
 
 // Create The event
-router.post('/events', getUserFromSession, createEvent);
+router.post('/events', getUserFromSession, valInvite, createEvent);
 
 // List all the events
-router.get('/events', getEvents);
+router.get('/events', getUserFromSession, getEvents);
 
 // Get a precise event using it's id
 router.get('/events/:id', getUserFromSession, getEventById);

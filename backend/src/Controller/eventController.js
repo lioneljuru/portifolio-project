@@ -1,39 +1,59 @@
 import { Event } from '../models/Event.js';
+import { User } from '../models/userSchema.js'
 
 export const createEvent = async (req, res) => {
-  const { eventName,
-         eventTime,
+  const { title,
          description,
-         startTime,
-         endTime,
-         isAllDay,
+         location,
+         start,
+         end,
+         allDay,
          isPriority,
-         invitedUsers
         } = req.body;
+  let { invitedUsers } = req.body;
 
-  try {
-    const event = new Event({
-      eventName,
-      description,
-      eventTime,
-      startTime,
-      endTime,
-      isAllDay,
-      isPriority,
-      createdBy: req.user.id,
-      invitedUsers
-    });
-    await event.save();
-    res.status(201).json(event);
-  } catch (err) {
-    console.error(err.message);
-    res.status(400).json({error: `${err}`});
-  }
-};
+    // check if input from user is @users and fill invited users with all users in the database
+    if (invitedUsers[0] === '@users'){
+      const users = await User.find({}, {email: 1}) // returns only the email fields
+      const emails = users.map(users => users.email);
+      invitedUsers = emails;
+    }
+
+    if (req.nonExistingUsers.length === 0) {
+      try {
+        const event = new Event({
+          title,
+          description,
+          location,
+          start,
+          end,
+          allDay,
+          isPriority,
+          createdBy: req.user.id,
+          invitedUsers
+        });
+        await event.save();
+        res.status(201).json(event);
+      } catch (err) {
+        console.error(err.message);
+        res.status(400).json({error: `${err}`});
+      }
+    } else {
+      const userNotFound = req.nonExistingUsers.map(item => item);
+      return res.status(404).json({error: `${userNotFound} not found`})
+    }
+  };
 
 export const getEvents = async (req, res) => {
   try {
-    const events = await Event.find().populate('createdBy', ['firstname', 'email']);
+    const { user } = req;
+    const userId = user._id
+    const events = await Event.find({
+      $or: [
+        { createdBy: userId },
+        { invitedUsers: { $in: [user.email] } }
+      ]
+    });
     res.json(events);
   } catch (err) {
     console.error(err.message);
@@ -43,7 +63,7 @@ export const getEvents = async (req, res) => {
 
 export const getEventById = async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id).populate('createdBy', ['firstname', 'email']);
+    const event = await Event.findById(req.params.id).populate('createdBy', ['name', 'email']);
     if (!event) return res.status(404).json({ msg: 'Event Not Found' });
     res.json(event);
   } catch (err) {
@@ -53,11 +73,12 @@ export const getEventById = async (req, res) => {
 };
 
 export const updateEvent = async (req, res) => {
-  const { eventName,
-         eventTime,
-         startTime,
-         endTime,
-         isAllday,
+  const { title,
+         description,
+         location,
+         start,
+         end,
+         allDay,
          isPriority,
          invitedUsers
         } = req.body;
@@ -70,11 +91,12 @@ export const updateEvent = async (req, res) => {
     }
 
     const updatedEvent = {
-      eventName,
-      eventTime,
-      startTime,
-      endTime,
-      isAllDay,
+      title,
+      description,
+      location,
+      start,
+      end,
+      allDay,
       isPriority,
       invitedUsers
     };

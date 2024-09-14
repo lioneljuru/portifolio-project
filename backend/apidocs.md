@@ -209,12 +209,11 @@
 **Request Body**:
 ```
     {
-       "eventName": "Alx graduation",
+       "title": "Alx graduation",
        "description": "Celebration of 1 year program",
-       "eventTime": "2024-10-05T10:20:30.000Z",
-       "startTime": "2024-10-05T10:02:45.000Z",
-       "endTime": "2024-10-05T18:02:45.000Z",
-       "isAllDay": false,
+       "start": "2024-10-05T10:02:45.000Z",
+       "end": "2024-10-05T18:02:45.000Z",
+       "allDay": false,
        "isPriority": false
     }
 ```
