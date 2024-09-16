@@ -18,7 +18,7 @@ export const resolveUserId = async(req, res, next) => {
 }
 
 export const valInvite = async(req, res, next) => {
-  const { invitedUsers } = req.body;
+  const invitedUsers = (req.body.invitedUsers) ? req.body.invitedUsers : [];
   if (invitedUsers[0] === "@users"){
     req.nonExistingUsers = [];
     return next();

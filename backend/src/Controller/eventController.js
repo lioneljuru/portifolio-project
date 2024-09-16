@@ -19,7 +19,7 @@ export const createEvent = async (req, res) => {
       invitedUsers = emails;
     }
 
-    if (req.nonExistingUsers.length === 0) {
+    if ((!req.nonExistingUsers) || (req.nonExistingUsers.length === 0)) {
       try {
         const event = new Event({
           title,
