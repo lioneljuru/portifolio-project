@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 import '../styles/Login.css';
 
 export default function Login() {
@@ -9,27 +9,32 @@ export default function Login() {
     email: '',
     password: '',
   });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { login } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    if (error) setError(null); // Clear the error if user starts
   };
 
-  function handleLogin(event) {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    const email = formValues.email;
-    const password = formValues.password;
+    const { email, password } = formValues;
 
-    if (email.trim() && password.trim()) {
-      const success = login(email, password);
+    if (!email.trim() || !password.trim()) {
+      return setError('Email and password are required');
+    }
 
-      if (!success) {
-        toast.error("Invalid email or password");
-        setFormValues({ email: '', password: '' });
-      } else {
-        toast.success('Login Successful');
-      }
-
+    setLoading(true);
+    try {
+      await login(email, password);
+      setFormValues({ email: '', password: '' }); // Clear the form
+    } catch (error) {
+      const errorMessage = error.response ? error.response.data.error : error.message;
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -41,7 +46,7 @@ export default function Login() {
         <input
           id='email'
           name='email'
-          type='text'
+          type='email'
           autoComplete="email"
           value={formValues.email}
           onChange={(handleInputChange)}
@@ -57,12 +62,14 @@ export default function Login() {
           onChange={(handleInputChange)}
           className="password"
         />
-
-        <button>LOG IN</button>
+        {error && <p className="login__error">{error}</p>}
+        <button type="submit" className="login__button" disabled={loading}>
+          {loading ? <div className="spinner"></div> : 'Sign in'}
+        </button>
         <p style={{ textAlign: 'center', marginTop: '30px' }}>
           Don't have an account?{' '}
           <Link className="Link" to='/register'>
-            Create one
+            Create an account
           </Link>
         </p>
       </form>

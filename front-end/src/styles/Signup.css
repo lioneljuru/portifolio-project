@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /*height: 100vh;*/
     background-color: #f0f2f5;
 }
 
@@ -29,7 +29,7 @@
     text-align: left;
     margin-bottom: 5px;
     color: #555;
-    font-size: 14px;
+    /*font-size: 14px;*/
 }
 
 .signup__form input {
@@ -39,6 +39,17 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+}
+
+.signup__form input:focus {
+    outline: none;
+    border-color: #007BFF;
+}
+
+.signup__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .signupButton {
@@ -52,10 +63,18 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .signupButton:hover {
     background-color: #0056b3;
+}
+
+.signupButton:disabled {
+    background-color: #0056b3;
+    cursor: not-allowed;
 }
 
 .signup__form .link {
@@ -66,4 +85,23 @@
 
 .signup__form .link:hover {
     color: #0056b3;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid white;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

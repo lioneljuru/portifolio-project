@@ -1,17 +1,17 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-//import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import '../styles/Signup.css';
 
 export default function Signup() {
   const { signup } = useContext(AuthContext);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     email: '',
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     dob: '',
     password: '',
   });
@@ -23,17 +23,25 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, firstname, lastname, dob, password } = formValues;
+    const { email, firstName, lastName, dob, password } = formValues;
 
-    if (!email.trim()) return setError('Email is required');
-    if (!firstname.trim()) return setError('First Name is required');
-    if (!dob.trim()) return setError('Date of Birth is required');
-    if (!password.trim()) return setError('Password is required');
+    if (!email.trim()) {
+      return setError('Email is required');
+    }
+    if (!firstName.trim()) {
+      return setError('First Name is required');
+    }
+    if (!dob.trim()) {
+      return setError('Date of Birth is required');
+    }
+    if (!password.trim()) {
+      return setError('Password is required');
+    }
 
     setLoading(true);
     try {
-      await signup(email, firstname, lastname, dob, password);
-      setFormValues({ email: '', firstname: '', lastname: '', dob: '', password: '' }); // Clear the form
+      await signup(email, firstName, lastName, dob, password);
+      setFormValues({ email: '', firstName: '', lastName: '', dob: '', password: '' }); // Clear the form
     } catch (error) {
       const errorMessage = error.response ? error.response.data.error : error.message;
       setError(errorMessage);
@@ -56,22 +64,22 @@ export default function Signup() {
           autoComplete="email"
         />
 
-        <label htmlFor='firstname'>First Name</label>
+        <label htmlFor='firstName'>First Name</label>
         <input
-          id='firstname'
-          name='firstname'
+          id='firstName'
+          name='firstName'
           type='text'
-          value={formValues.firstname}
+          value={formValues.firstName}
           onChange={handleInputChange}
           autoComplete="name"
         />
 
-        <label htmlFor="lastname">Last Name</label>
+        <label htmlFor="lastName">Last Name</label>
         <input
-          id="lastname"
-          name="lastname"
+          id="lastName"
+          name="lastName"
           type="text"
-          value={formValues.lastname}
+          value={formValues.lastName}
           onChange={handleInputChange}
           autoComplete="name"
           placeholder="optional"
@@ -95,12 +103,7 @@ export default function Signup() {
           value={formValues.password}
           onChange={handleInputChange}
         />
-
-        {error && <p className="signup__error">{error}</p>}
-
-        <button type="submit" className='signupButton' disabled={loading}>
-          {loading ? <div className="spinner"></div> : 'Sign up'}
-        </button>
+        <button className='signupButton'>REGISTER</button>
         <p style={{ textAlign: "center", marginTop: "30px" }}>
           Already have an account?{" "}
           <Link className='link' to='/login'>
