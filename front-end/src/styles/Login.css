@@ -41,6 +41,18 @@
     font-size: 16px;
 }
 
+.login__form input:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.login__error {
+    color: red;
+    /*font-size: 14px;*/
+    margin-top: 10px;
+}
+
 .login__form button {
     width: 100%;
     padding: 10px;
@@ -52,6 +64,14 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__button:disabled {
+    background-color: #0056b3;
+    cursor: not-allowed;
 }
 
 .login__form button:hover {
@@ -66,4 +86,23 @@
 
 .login__form .Link:hover {
     color: #0056b3;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid white;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
