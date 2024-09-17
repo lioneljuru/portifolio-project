@@ -2,7 +2,7 @@ import { createApp } from './appbuild.js';
 import mongoose from 'mongoose';
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 const HOST = process.env.HOST || 'localhost';
 const DBName = process.env.DBName || 'Scheduly';
 

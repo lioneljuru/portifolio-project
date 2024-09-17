@@ -2,15 +2,13 @@ import { Event } from '../models/Event.js';
 import { User } from '../models/userSchema.js'
 
 export const createEvent = async (req, res) => {
-  const { title,
-         description,
-         location,
-         start,
-         end,
-         allDay,
-         isPriority,
-        } = req.body;
-  let { invitedUsers } = req.body;
+  const { body } = req;
+  const { location, isPriority, allDay } = body;
+  const title = (body.title) ? body.title : "";
+  const description = (body.description) ? body.description : "";
+  const start = (body.start) ? body.start : "";
+  const end = (body.end) ? body.end : "";
+  let { invitedUsers } = body;
 
     // check if input from user is @users and fill invited users with all users in the database
     if (invitedUsers[0] === '@users'){
@@ -73,21 +71,20 @@ export const getEventById = async (req, res) => {
 };
 
 export const updateEvent = async (req, res) => {
-  const { title,
-         description,
-         location,
-         start,
-         end,
-         allDay,
-         isPriority,
-         invitedUsers
-        } = req.body;
+  const { body } = req;
+  const { location, isPriority, allDay } = body;
+  const title = (body.title) ? body.title : "";
+  const description = (body.description) ? body.description : "";
+  const start = (body.start) ? body.start : "";
+  const end = (body.end) ? body.end : "";
+  const invitedUsers = (body.invitedUsers) ? body.invitedUsers : []
+
   try {
     let event = await Event.findById(req.params.id);
     if (!event) return res.status(404).json({ msg: 'Event Not Found' });
 
     if (event.createdBy.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'User Not Authorized' });
+      return res.status(401).json({ msg: 'User Not Authorized To Update' });
     }
 
     const updatedEvent = {
@@ -115,7 +112,7 @@ export const deleteEvent = async (req, res) => {
     if (!event) return res.status(404).json({ msg: 'Event Not Found' });
 
     if (event.createdBy.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'User Not Authorized' });
+      return res.status(401).json({ msg: 'User Not Authorized To Delete' });
     }
 
     await event.remove();
