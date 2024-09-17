@@ -256,3 +256,112 @@
     }
   ```
 </details>
+
+<details close>
+<summary><b>Endpoint:</b> <code>PUT /events/:id </code></summary>
+<br>
+
+**Description**: Updates an Event Object
+
+**Headers**:
+     `content-type`: application/json
+
+**Request Body**:
+```
+    {
+       "title": "Alx graduation",
+       "description": "Celebration of 1 year program",
+       "start": "2024-10-05T10:02:45.000Z",
+       "end": "2024-10-05T18:02:45.000Z",
+       "allDay": false,
+       "isPriority": false
+    }
+```
+
+**Success Response**:
+  * Code: 201 Created
+  * Content-example:
+```
+      {
+        "eventName": "Alx graduation",
+        "description": "Celebration of 1 year program",
+        "eventTime": "2024-10-05T10:20:30.000Z",
+        "startTime": "2024-10-05T10:02:45.000Z",
+        "endTime": "2024-10-05T18:02:45.000Z",
+        "isAllDay": false,
+        "isPriority": false,
+        "createdBy": "66dee88cf7456754137a8b01",
+        "invitedUsers": [],
+        "_id": "66e4b0700fa9802ce1ab2fb6",
+        "dateCreated": "2024-09-13T21:36:48.875Z",
+        "__v": 0
+      }
+```
+
+**Error Response**:
+  * `Code`: 401 `Unauthorised`
+  * `Content Example`:
+    - This error occurs when user is not logged in
+  ```
+    {
+      "error": "Unauthorised"
+    }
+  ```
+  * `Code`: 403  `User Not Authorised to Update`
+  * `Content Example`:
+      - This occurs when a user who is not the creator of the event tries to edit the event
+  ```
+    {
+      "error": "User Not Authorised to Update"
+    }
+  ```
+  * `Code`: 404 `Not Found`
+  * `Content Example`:
+    - This occurs if the event is not found due to the id passed into it
+  ```
+    {
+      "error": "Event Not Found"
+    }
+  ```
+
+</details>
+
+<details close>
+<summary><b>Endpoint:</b> <code>DELETE /events/:id </code></summary>
+<br>
+
+**Description**: Delete event from database
+
+**Headers**:
+     `content-type`: application/json
+
+**Request Body**:
+`None`
+
+**Success Response**:
+  * `Code`: 200 `Ok`
+  * `Content-example`:
+```
+      {
+        Ok
+      }
+```
+
+**Error Response**:
+  * `Code`: 401 `Unauthorised`
+  * `Content Example`:
+    - This error occurs when user is not logged in
+  ```
+    {
+      "error": "Unauthorised"
+    }
+  ```
+  * `Code`: 404 `Not Found`
+  * `Content Example`:
+    - This occurs if the event is not found due to the id passed into it
+  ```
+    {
+      "error": "Event Not Found"
+    }
+  ```
+</details>

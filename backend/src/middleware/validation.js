@@ -28,7 +28,7 @@ export const valInvite = async(req, res, next) => {
     for(let user = 0; user < invitedUsers.length; user++) {
       const existingUser = await User.findOne({email: invitedUsers[user]});
       if (!existingUser) {
-        nonExistingUsers.push(user);
+        nonExistingUsers.push(invitedUsers[user]);
       };
   }
   req.nonExistingUsers = nonExistingUsers;

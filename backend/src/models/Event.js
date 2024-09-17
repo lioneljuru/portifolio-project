@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 const EventSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: {type: String, required: true },
-  start: { type: Date, required: true },
-  end: { type: Date, required: true },
+  start: { type: Date, default: Date.now},
+  end: { type: Date, default: Date.now },
   allDay: { type: Boolean, default: false },
   location: {type: String, default: "remote"},
   isPriority: { type: Boolean, default: false},
