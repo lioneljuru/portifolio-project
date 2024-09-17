@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
+import axios from 'axios';
+import { toast } from "react-toastify";
 
 //Create EventContext
 export const EventContext = createContext();
@@ -8,7 +10,7 @@ export const EventProvider = ({ children }) => {
   const [eventData, setEventData] = useState([]); // This will store all the events
 
   // Load events from localStorage when the component mounts
-  useEffect(() => {
+  /*useEffect(() => {
     const storedEvents = localStorage.getItem('events');
     if (storedEvents) {
       setEventData(JSON.parse(storedEvents));
@@ -22,15 +24,99 @@ export const EventProvider = ({ children }) => {
     if (eventData.length > 0) {
       localStorage.setItem('events', JSON.stringify(eventData));
     }
-  }, [eventData]);
+  }, [eventData]);*/
+
+
+  //localStorage.removeItem('events');
+  //localStorage.removeItem('user');
+  console.log(localStorage.getItem('user'));
+  const newEvent = {
+    title: 'Created one event',
+    start: '2021-09-03T12:00:00',
+    end: '2021-09-03T15:00:00',
+    invitedUsers: ['test123@gmail.com'],
+    allDay: false,
+    location: 'Location one',
+    description: 'Description 3',
+  }
+
+  const createEvent = async (newEvent) => {
+    try {
+      // Make sure the endpoint is correct, add base URL if necessary.
+      // const user = JSON.parse(localStorage.getItem('user'));
+      const response = await axios.post('/events', newEvent);
+
+      // Assuming the backend responds with the created event.
+      const createdEvent = response.data;
+
+      // Log the created event
+      console.log('Event created:', createdEvent);
+
+    } catch (error) {
+      // If the error response contains detailed info
+      if (error.response) {
+        console.error('Error creating event:', error.response.data);
+      } else {
+        // General network errors or other issues
+        console.error('Error creating event:', error.message);
+      }
+    }
+  }
+
+  // Call the function to create the event
+  createEvent(newEvent);
+
+
+  const getEvent = async () => {
+    try {
+      // Make sure the endpoint is correct, add base URL if necessary.
+      // const user = JSON.parse(localStorage.getItem('user'));
+      const response = await axios.get('/events');
+
+      // Assuming the backend responds with the created event.
+      const getEvent = response.data;
+
+      // Log the created event
+      console.log('Get events:', getEvent);
+
+    } catch (error) {
+      // If the error response contains detailed info
+      if (error.response) {
+        console.error('Error creating event:', error.response.data);
+      } else {
+        // General network errors or other issues
+        console.error('Error creating event:', error.message);
+      }
+    }
+  }
+
+  //getEvent();
+  //const createEvent = () => { };
+
+
 
   // CRUD operations
   // Function to create a new event
-  const createEvent = (newEvent) => {
-    // Here, you'd typically make an API call to store the event in a backend
-    // For now, we'll just update the local state
-    setEventData((prevEvents) => [...prevEvents, newEvent]);
-  };
+  /*const createEvent = async (newEvent) => {
+    try {
+      const response = await axios.post('/events', newEvent);
+      const createdEvent = response.data.event;
+      setEventData((prevEvents) => [...prevEvents, createdEvent]);
+      toast.success('Event created successfully');
+    } catch (error) {
+      let errorMessage = 'Something went wrong, please try again';
+      if (error.response) {
+        // The server responded with a status code outside the range of 2xx
+        errorMessage = error.response.data.error || `Error ${error.response.status}: ${error.response.statusText}`;
+      } else if (error.request) {
+        //  Handle network errors, The request was made but no response was received
+        errorMessage = "No response from the server, please try again";
+      }
+      // Something happened in setting up the request that triggered an Error
+      toast.error(errorMessage);
+      throw error;
+    }
+  };*/
 
   const updateEvent = (updatedEvent) => {
     setEventData((prevEvents) =>
