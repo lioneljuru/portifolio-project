@@ -3,7 +3,7 @@ import { EventContext } from "../context/EventContext";
 import '../styles/CreateEvent.css';
 
 function CreateEvent() {
-  const { createEvent } = useContext(EventContext);
+  //const { createEvent } = useContext(EventContext);
   const [eventData, setEventData] = useState({
     name: '',
     date: '',
@@ -18,7 +18,7 @@ function CreateEvent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createEvent(eventData); // Call the createEvent function from context to add the event
+    //createEvent(eventData); // Call the createEvent function from context to add the event
     setEventData({
       name: '',
       date: '',
