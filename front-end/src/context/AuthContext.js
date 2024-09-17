@@ -82,11 +82,10 @@ export const AuthProvider = ({ children }) => {
     };
   };
 
-  console.log(localStorage.getItem(user));
   // Function to handle user logout
   const logout = async () => {
     try {
-      await axios.post('/auth/logout', {}, { withCredentials: true });
+      await axios.post('/auth/logout');
       setUser(null); // If logout is successful, remove the user object
       localStorage.removeItem('user'); // Remove user data from localStorage
       toast.success('Logout successful!');
@@ -113,5 +112,4 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   )
-
 }
