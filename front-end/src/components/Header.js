@@ -20,7 +20,7 @@ function Header() {
             <Link to="/calendar">Calendar</Link>
           </li>
           <li>
-            <Link to="/create-event">Create Event</Link>
+            <Link to="/profile">Profile</Link>
           </li>
           {/* Show user info and logout if logged in */}
           {user ? (
