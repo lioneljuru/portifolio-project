@@ -11,8 +11,16 @@ function Home() {
   };
 
   const filteredEvents = eventData.filter(event =>
-    event.name.toLowerCase().includes(searchQuery.toLowerCase())
+    event.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const formatDateTime = (dateTime) => {
+    const date = new Date(dateTime);
+    if (isNaN(date.getTime())) {
+      return 'Invalid Date';
+    }
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  };
 
   return (
     <div className="home">
@@ -22,10 +30,16 @@ function Home() {
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event, index) => (
             <li key={event.id ? event.id : index}>
-              <h3>{event.name}</h3>
-              <p>{event.date} at {event.time}</p>
+              <h3>{event.title}</h3>
+              <p>Starts {formatDateTime(event.start)} at {formatDateTime(event.end)}</p>
               <p>Location: {event.location}</p>
               <p>{event.description}</p>
+              <p>Invited Users:</p>
+              <ul className="invited-users">
+                {event.invitedUsers.map((user, userIndex) => (
+                  <li key={userIndex}>{user}</li>
+                ))}
+              </ul>
             </li>
           ))
         ) : (
