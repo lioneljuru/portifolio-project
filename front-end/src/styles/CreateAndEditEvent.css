@@ -1,0 +1,251 @@
+/* EventForm.css */
+
+/* Modal to center on the screen */
+.event-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    /* Set width like the example form */
+    background-color: #fff;
+    /* Same background as your earlier form */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    z-index: 1000;
+}
+
+/* General form container */
+.form-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Title styling */
+.event-form h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e91e63;
+    padding-bottom: 10px;
+}
+
+/* Form layout to ensure even spacing */
+.event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Form row styling for input pairs like Title & Location */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label styles */
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Input and textarea styling */
+input[type="text"],
+input[type="datetime-local"],
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #e91e63;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Checkbox styling */
+.checkboxes {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.checkboxes label {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Invited Users Section */
+/* Ensure added users appear inline */
+.user-invite {
+    display: flex;
+    gap: 10px;
+}
+
+.user-invite input {
+    flex: 1;
+}
+
+.user-invite button {
+    padding: 10px;
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user-invite button:hover {
+    background-color: #d81b60;
+}
+
+/* List of invited users inline */
+.invited-list {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+/* Style for each invited user */
+.invited-list li {
+    background-color: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+/* Remove button for each user */
+.invited-list li button {
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.invited-list li button:hover {
+    background-color: #e53935;
+}
+
+/* Form buttons container */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Create/Save button */
+.save-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #388e3c;
+}
+
+/* Delete button */
+.delete-button {
+    background-color: #ff5252;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #e53935;
+}
+
+/* Cancel button */
+.cancel-button {
+    background-color: #9e9e9e;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #757575;
+}
+
+/* Modal background for dimming */
+.modal::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*background-color: rgba(0, 0, 0, 0.5);*/
+    z-index: -1;
+}
+
+.error-message {
+    color: #f44336;
+    font-size: 16px;
+    /*margin-top: 2px;*/
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .modal {
+        width: 90%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

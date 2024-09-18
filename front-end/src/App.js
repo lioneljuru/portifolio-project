@@ -9,10 +9,8 @@ import Home from './pages/Home'; // Event Viewing and filtering
 import { AuthProvider } from './context/AuthContext';
 import { EventProvider } from './context/EventContext';
 import PrivateRoute from './components/PrivateRoute';
-import CreateEvent from './pages/CreateEvent'; // Event Creation form
-import CalendarPage from './pages/CalendarPage'; // Calendar View
-//import Profile from "./components/Profile";
-//👇🏻 React-Toastify configuration
+import Profile from './pages/Profile';
+import CalendarPage from './pages/CalendarPage';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -31,7 +29,7 @@ export default function App() {
               {/* Private routes */}
               <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
               <Route path="/calendar" element={<PrivateRoute><CalendarPage /></PrivateRoute>} />
-              <Route path="/create-event" element={<PrivateRoute><CreateEvent /></PrivateRoute>} />
+              <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
             </Routes>
             <Footer />
             <ToastContainer />
