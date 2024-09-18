@@ -10,7 +10,7 @@ export const EventProvider = ({ children }) => {
   const [eventData, setEventData] = useState([]); // This will store all the events
 
   // Load events from localStorage when the component mounts
-  /*useEffect(() => {
+  useEffect(() => {
     const storedEvents = localStorage.getItem('events');
     if (storedEvents) {
       setEventData(JSON.parse(storedEvents));
@@ -24,19 +24,19 @@ export const EventProvider = ({ children }) => {
     if (eventData.length > 0) {
       localStorage.setItem('events', JSON.stringify(eventData));
     }
-  }, [eventData]);*/
+  }, [eventData]);
 
 
   //localStorage.removeItem('events');
   //localStorage.removeItem('user');
-  console.log(localStorage.getItem('user'));
+  /*console.log(localStorage.getItem('user'));
   const newEvent = {
-    title: 'Created one event',
+    title: 'Created another',
     start: '2021-09-03T12:00:00',
     end: '2021-09-03T15:00:00',
     invitedUsers: ['test123@gmail.com'],
     allDay: false,
-    location: 'Location one',
+    location: 'Location another',
     description: 'Description 3',
   }
 
@@ -61,43 +61,44 @@ export const EventProvider = ({ children }) => {
         console.error('Error creating event:', error.message);
       }
     }
-  }
+  }*/
 
   // Call the function to create the event
-  createEvent(newEvent);
+  //createEvent(newEvent);
 
-
-  const getEvent = async () => {
-    try {
-      // Make sure the endpoint is correct, add base URL if necessary.
-      // const user = JSON.parse(localStorage.getItem('user'));
-      const response = await axios.get('/events');
-
-      // Assuming the backend responds with the created event.
-      const getEvent = response.data;
-
-      // Log the created event
-      console.log('Get events:', getEvent);
-
-    } catch (error) {
-      // If the error response contains detailed info
-      if (error.response) {
-        console.error('Error creating event:', error.response.data);
-      } else {
-        // General network errors or other issues
-        console.error('Error creating event:', error.message);
+  /*
+    const getEvent = async () => {
+      try {
+        // Make sure the endpoint is correct, add base URL if necessary.
+        // const user = JSON.parse(localStorage.getItem('user'));
+        const response = await axios.get('/events');
+  
+        // Assuming the backend responds with the created event.
+        const getEvent = response.data;
+  
+        // Log the created event
+        console.log('Get events:', getEvent);
+  
+      } catch (error) {
+        // If the error response contains detailed info
+        if (error.response) {
+          console.error('Error creating event:', error.response.data);
+        } else {
+          // General network errors or other issues
+          console.error('Error creating event:', error.message);
+        }
       }
     }
-  }
-
-  //getEvent();
-  //const createEvent = () => { };
+  
+    //getEvent();
+    //const createEvent = () => { };
+    */
 
 
 
   // CRUD operations
   // Function to create a new event
-  /*const createEvent = async (newEvent) => {
+  const createEvent = async (newEvent) => {
     try {
       const response = await axios.post('/events', newEvent);
       const createdEvent = response.data.event;
@@ -116,7 +117,7 @@ export const EventProvider = ({ children }) => {
       toast.error(errorMessage);
       throw error;
     }
-  };*/
+  };
 
   const updateEvent = (updatedEvent) => {
     setEventData((prevEvents) =>
@@ -134,19 +135,32 @@ export const EventProvider = ({ children }) => {
     // For now, let's mock the data
     const mockedEvents = [
       {
-        name: "Event 1",
-        date: "2021-09-01",
-        time: "10:00",
-        location: "Location 1",
-        description: "Description 1",
+        title: 'Created one',
+        start: '2021-09-03T12:00',
+        end: '2021-09-03T15:00',
+        invitedUsers: ['test123@gmail.com'],
+        allDay: false,
+        location: 'Location one',
+        description: 'Description one',
       },
       {
-        name: "Event 2",
-        date: "2021-09-02",
-        time: "11:00",
-        location: "Location 2",
-        description: "Description 2",
+        title: 'Created two',
+        start: '2021-09-03T12:00',
+        end: '2021-09-03T15:00',
+        invitedUsers: ['test123@gmail.com'],
+        allDay: false,
+        location: 'Location two',
+        description: 'Description two',
       },
+      {
+        title: 'Created three',
+        start: '2021-09-03T12:00',
+        end: '2021-09-03T15:00',
+        invitedUsers: ['test123@gmail.com'],
+        allDay: false,
+        location: 'Location three',
+        description: 'Description three',
+      }
     ];
     console.log('Fetching events:', mockedEvents);
     setEventData(mockedEvents);
