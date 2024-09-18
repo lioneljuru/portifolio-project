@@ -9,8 +9,8 @@ import Home from './pages/Home'; // Event Viewing and filtering
 import { AuthProvider } from './context/AuthContext';
 import { EventProvider } from './context/EventContext';
 import PrivateRoute from './components/PrivateRoute';
-import CreateEvent from './pages/CreateEvent'; // Event Creation form
-import CalendarPage from './pages/CalendarPage'; // Calendar View
+import CreateEvent from './pages/Profile';
+import CalendarPage from './pages/CalendarPage';
 //import Profile from "./components/Profile";
 //👇🏻 React-Toastify configuration
 import { ToastContainer } from "react-toastify";
