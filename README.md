@@ -2,7 +2,7 @@
 ``A web app built using Node.js, Express, MongoDB and passport.js for session-based authentication.
 The API allows for event creation, management, RSVP functionality and user authentication.
 The application is structured around specific roles and permissions ensuring that only invited users
-can RSVP to events``
+can see or RSVP to the events``
 
 ## Table of contents
 
@@ -31,7 +31,7 @@ This means that users must register and log in using an email and password
 ### Event Management
 
 Only authenticated users can create, update, and delete events. Each event has
-fields like the event name, start, end and a list of invited users.
+fields like the title, description, start, end and an array of invited users.
 1. Create an Event
 2. Update an Event
 3. Delete an Event
@@ -58,8 +58,10 @@ error responses:
 4. Validation Errors
    * 400 Bad Request: Returned if the input data for event creation or update is invalid
 5. Server Errors
-   * 500 Internal server Error: Returnet if a server meets an unexpected condition
+   * 500 Internal server Error: Returns, if a server meets an unexpected condition
      that prevents it from fulfilling the request made by the client or user.
+
+and many more.
 
 ### Environment Variables
 
