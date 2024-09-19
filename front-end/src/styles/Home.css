@@ -2,9 +2,10 @@
 .home {
     max-width: 800px;
     margin: 0 auto;
+    min-height: 100vh;
     padding: 20px;
     font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f0f2f5;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -13,15 +14,28 @@
     text-align: center;
     color: #333;
     margin-bottom: 20px;
+    font-size: 2.5em;
+    /* Increased font size */
+    font-weight: bold;
+    color: #2c3e50;
 }
 
 .searchBtn {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
+    /* Increased padding */
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 18px;
+    /* Increased font size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.searchBtn:focus {
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 ul {
@@ -32,32 +46,51 @@ ul {
 li {
     background-color: #fff;
     margin-bottom: 15px;
-    padding: 15px;
+    padding: 20px;
+    /* Increased padding */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 li:hover {
     transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 li h3 {
-    margin: 0 0 10px;
-    color: #007BFF;
+    font-size: 1.8em;
+    /* Increased font size */
+    color: #2c3e50;
+    margin-bottom: 10px;
 }
 
 li p {
     margin: 5px 0;
     color: #555;
+    font-size: 1.2em;
+    /* Increased font size */
 }
 
 li p:first-of-type {
     font-weight: bold;
+    color: #e74c3c;
 }
 
 li p:last-of-type {
     font-style: italic;
+    color: #8e44ad;
+}
+
+.invited-users {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.invited-users li {
+    font-size: 1em;
+    /* Increased font size */
+    color: #777;
 }
 
 @media (max-width: 600px) {
@@ -66,18 +99,22 @@ li p:last-of-type {
     }
 
     .searchBtn {
-        font-size: 14px;
+        font-size: 16px;
+        /* Adjusted font size */
     }
 
     li {
-        padding: 10px;
+        padding: 15px;
+        /* Adjusted padding */
     }
 
     li h3 {
-        font-size: 18px;
+        font-size: 1.5em;
+        /* Adjusted font size */
     }
 
     li p {
-        font-size: 14px;
+        font-size: 1em;
+        /* Adjusted font size */
     }
 }

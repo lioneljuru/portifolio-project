@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import { EventContext } from '../context/EventContext';
+import '../styles/CalendarPage.css';
 
 export default function CalendarPage() {
-  const [events, setEvents] = useState([
-    { title: 'Event 1', start: '2024-09-13T10:00:00', end: '2024-09-13T13:00:00' },
-    { title: 'Event 2', start: '2024-09-07', end: '2024-09-10' },
-    { title: 'Event 3', start: '2024-09-18', end: '2024-09-20' },
-    { title: 'Event 4', start: '2024-09-24', end: '2024-09-27' },
-  ]);
+  const { eventData } = useContext(EventContext);
 
   /* const handleDateClick = (info) => {
      // Prompt user to add a new event or  Example of clicking a date to add an event
@@ -36,7 +33,7 @@ export default function CalendarPage() {
      // Delete event when clicked
      const updatedEvents = events.filter((event) => event.title !== info.event.title);
      setEvents(updatedEvents);
-   };*/
+   };
 
   const handleDateClick = (info) => {
     alert('Date clicked: ' + info.dateStr);
@@ -48,26 +45,29 @@ export default function CalendarPage() {
 
   const handleEventDrop = (info) => {
     alert(info.event.title + ' was dropped on ' + info.event.start.toISOString());
-  };
+  };*/
+
 
   return (
     <div className='calendar'>
       <h1>My Planning</h1>
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]} //  Add desired plugins
-        initialView='dayGridMonth' // Default view (e.g., month view)
-        events={events} // Events to display
-        dateClick={handleDateClick} // Handle clicks on dates
-        eventClick={handleEventClick} // Handle clicks on events
-        eventDrop={handleEventDrop} // Handle event drops
-        editable={true} // Allows drag and drop
-        selectable={true} // Allows selection of dates
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-        }}  // Add buttons to change view
-      />
+      <div className='calendar-wrapper'>
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]} //  Add desired plugins
+          initialView='dayGridMonth' // Default view (e.g., month view)
+          events={eventData} // Events to display
+          //dateClick={handleDateClick} // Handle clicks on dates
+          //eventClick={handleEventClick} // Handle clicks on events
+          //eventDrop={handleEventDrop} // Handle event drops
+          editable={true} // Allows drag and drop
+          selectable={true} // Allows selection of dates
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+          }}  // Add buttons to change view
+        />
+      </div>
     </div>
   );
 }

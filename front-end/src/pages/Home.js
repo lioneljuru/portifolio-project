@@ -29,10 +29,12 @@ function Home() {
       <ul>
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event, index) => (
-            <li key={event.id ? event.id : index}>
+            <li key={event.id ? event.id : index} className="event-item">
               <h3>{event.title}</h3>
-              <p>Starts {formatDateTime(event.start)} at {formatDateTime(event.end)}</p>
+              <p>Starts: {formatDateTime(event.start)} Ends: {formatDateTime(event.end)}</p>
               <p>Location: {event.location}</p>
+              {event.allDay && <p>All Day Event</p>}
+              {event.isPriority && <p>Priority Event</p>}
               <p>{event.description}</p>
               <p>Invited Users:</p>
               <ul className="invited-users">
@@ -40,10 +42,11 @@ function Home() {
                   <li key={userIndex}>{user}</li>
                 ))}
               </ul>
+              <p>Date Created: {formatDateTime(event.dateCreated)}</p>
             </li>
           ))
         ) : (
-          <p>No events available</p>
+          <p>No events available. Enjoy the silence.</p>
         )}
       </ul>
     </div>

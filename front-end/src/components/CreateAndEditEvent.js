@@ -34,6 +34,9 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
     if (new Date(start) >= new Date(end)) return setError('End date and time must be after start date and time');
     setError(null);
     const newEvent = { title, start, end, allDay, isPriority, location, invitedUsers, description };
+    if (isEditMode && event) {
+      newEvent._id = event._id; // Include the event ID if in edit mode
+    }
     onSubmit(newEvent);
   };
 
@@ -120,7 +123,7 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
                 <li key={index}>
                   {user}
                   <button type="button" onClick={() => removeUser(user)}>
-                    Remove
+                    &times;
                   </button>
                 </li>
               ))}

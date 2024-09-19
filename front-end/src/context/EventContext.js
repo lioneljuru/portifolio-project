@@ -28,80 +28,16 @@ export const EventProvider = ({ children }) => {
 
 
   //localStorage.removeItem('events');
+  //console.log('Events ', localStorage.getItem('events'));
   //localStorage.removeItem('user');
-  /*console.log(localStorage.getItem('user'));
-  const newEvent = {
-    title: 'Created another',
-    start: '2021-09-03T12:00:00',
-    end: '2021-09-03T15:00:00',
-    invitedUsers: ['test123@gmail.com'],
-    allDay: false,
-    location: 'Location another',
-    description: 'Description 3',
-  }
-
-  const createEvent = async (newEvent) => {
-    try {
-      // Make sure the endpoint is correct, add base URL if necessary.
-      // const user = JSON.parse(localStorage.getItem('user'));
-      const response = await axios.post('/events', newEvent);
-
-      // Assuming the backend responds with the created event.
-      const createdEvent = response.data;
-
-      // Log the created event
-      console.log('Event created:', createdEvent);
-
-    } catch (error) {
-      // If the error response contains detailed info
-      if (error.response) {
-        console.error('Error creating event:', error.response.data);
-      } else {
-        // General network errors or other issues
-        console.error('Error creating event:', error.message);
-      }
-    }
-  }*/
-
-  // Call the function to create the event
-  //createEvent(newEvent);
-
-  /*
-    const getEvent = async () => {
-      try {
-        // Make sure the endpoint is correct, add base URL if necessary.
-        // const user = JSON.parse(localStorage.getItem('user'));
-        const response = await axios.get('/events');
-  
-        // Assuming the backend responds with the created event.
-        const getEvent = response.data;
-  
-        // Log the created event
-        console.log('Get events:', getEvent);
-  
-      } catch (error) {
-        // If the error response contains detailed info
-        if (error.response) {
-          console.error('Error creating event:', error.response.data);
-        } else {
-          // General network errors or other issues
-          console.error('Error creating event:', error.message);
-        }
-      }
-    }
-  
-    //getEvent();
-    //const createEvent = () => { };
-    */
-
-
+  //console.log(localStorage.getItem('user'));
 
   // CRUD operations
   // Function to create a new event
   const createEvent = async (newEvent) => {
     try {
       const response = await axios.post('/events', newEvent);
-      const createdEvent = response.data.event;
+      const createdEvent = response.data;
       setEventData((prevEvents) => [...prevEvents, createdEvent]);
       toast.success('Event created successfully');
     } catch (error) {
@@ -115,55 +51,71 @@ export const EventProvider = ({ children }) => {
       }
       // Something happened in setting up the request that triggered an Error
       toast.error(errorMessage);
-      throw error;
+      //throw error;
     }
   };
 
-  const updateEvent = (updatedEvent) => {
-    setEventData((prevEvents) =>
-      prevEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event)
-    );
-  };
-
-  const deleteEvent = (eventId) => {
-    setEventData((prevEvents) => prevEvents.filter(event => event.id !== eventId));
-  };
-
-  // Function to fetch events (mocked for now)
-  const fetchEvents = () => {
-    // API call to fetch events from backend would go here
-    // For now, let's mock the data
-    const mockedEvents = [
-      {
-        title: 'Created one',
-        start: '2021-09-03T12:00',
-        end: '2021-09-03T15:00',
-        invitedUsers: ['test123@gmail.com'],
-        allDay: false,
-        location: 'Location one',
-        description: 'Description one',
-      },
-      {
-        title: 'Created two',
-        start: '2021-09-03T12:00',
-        end: '2021-09-03T15:00',
-        invitedUsers: ['test123@gmail.com'],
-        allDay: false,
-        location: 'Location two',
-        description: 'Description two',
-      },
-      {
-        title: 'Created three',
-        start: '2021-09-03T12:00',
-        end: '2021-09-03T15:00',
-        invitedUsers: ['test123@gmail.com'],
-        allDay: false,
-        location: 'Location three',
-        description: 'Description three',
+  const fetchEvents = async () => {
+    try {
+      const response = await axios.get('/events');
+      const events = response.data;
+      setEventData(events);
+    } catch (error) {
+      let errorMessage = 'Something went wrong, please try again';
+      if (error.response) {
+        // The server responded with a status code outside the range of 2xx
+        errorMessage = error.response.data.error || `Error ${error.response.status}: ${error.response.statusText}`;
+      } else if (error.request) {
+        //  Handle network errors, The request was made but no response was received
+        errorMessage = "No response from the server, please try again";
       }
-    ];
-    console.log('Fetching events:', mockedEvents);
-    setEventData(mockedEvents);
+      // Something happened in setting up the request that triggered an Error
+      toast.error(errorMessage);
+      //throw error
+    }
+  };
+
+  const updateEvent = async (updatedEvent) => {
+    console.log('Updated Event ', updatedEvent);
+    try {
+      const response = await axios.put(`/events/${updatedEvent._id}`, updatedEvent);
+      const updatedEventData = response.data;
+      setEventData((prevEvents) => prevEvents.map(event => event._id === updatedEventData._id ? updatedEventData : event));
+      toast.success('Event updated successfully');
+    } catch (error) {
+      let errorMessage = 'Something went wrong, please try again';
+      if (error.response) {
+        // The server responded with a status code outside the range of 2xx
+        errorMessage = error.response.data.error || `Error ${error.response.status}: ${error.response.statusText}`;
+      } else if (error.request) {
+        //  Handle network errors, The request was made but no response was received
+        errorMessage = "No response from the server, please try again";
+      }
+      // Something happened in setting up the request that triggered an Error
+      toast.error(errorMessage);
+      //throw error;
+    }
+  };
+
+  const deleteEvent = async (eventId) => {
+    console.log('Event ID ', eventId);
+    try {
+      await axios.delete(`/events/${eventId}`);
+      setEventData((prevEvents) => prevEvents.filter(event => event._id !== eventId));
+      toast.success('Event deleted successfully');
+    } catch (error) {
+      let errorMessage = 'Something went wrong, please try again';
+      if (error.response) {
+        // The server responded with a status code outside the range of 2xx
+        errorMessage = error.response.data.error || `Error ${error.response.status}: ${error.response.statusText}`;
+      } else if (error.request) {
+        // Handle network errors, The request was made but no response was received
+        errorMessage = "No response from the server, please try again";
+      }
+      // Something happened in setting up the request that triggered an Error
+      toast.error(errorMessage);
+      //throw error;
+    }
   };
 
   return (
