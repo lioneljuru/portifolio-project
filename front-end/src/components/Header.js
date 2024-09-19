@@ -1,26 +1,37 @@
 // src/components/Header.js
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
 import '../styles/Header.css'; // For optional styling
 
 function Header() {
   const { user, logout } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <header className="header">
       <nav className="navbar">
         <div className="logo">
-          <h2>Scheduler App</h2>
+          <h2>SCHEDULY</h2>
         </div>
-        <ul className="nav-links">
+        <div className="hamburger" onClick={toggleMenu}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/calendar">Calendar</Link>
+            <Link to="/profile">Profile</Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to="/calendar">Calendar</Link>
           </li>
           {/* Show user info and logout if logged in */}
           {user ? (

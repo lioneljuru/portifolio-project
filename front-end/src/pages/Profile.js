@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { EventContext } from '../context/EventContext';
 import CreateAndEditEvent from '../components/CreateAndEditEvent';
+import { AuthContext } from '../context/AuthContext';
 import '../styles/Profile.css';
 
 const Profile = () => {
+  const { user } = useContext(AuthContext);
   const { eventData, createEvent, updateEvent, deleteEvent } = useContext(EventContext);
   const [isCreating, setIsCreating] = useState(false);
   const [editingEvent, setEditingEvent] = useState(null);
@@ -24,7 +26,7 @@ const Profile = () => {
 
   const handleSubmit = (event) => {
     if (editingEvent) {
-      updateEvent(event);
+      updateEvent({ ...event, _id: editingEvent._id });
     } else {
       createEvent(event);
     }
@@ -47,6 +49,8 @@ const Profile = () => {
 
   return (
     <div className="profile">
+      <h2>{user.email}</h2>
+      <p>@{user.name}</p>
       <h2>My Events</h2>
       <button className="createBtn" onClick={handleCreate}>Create Event</button>
       {isCreating && (
@@ -67,8 +71,10 @@ const Profile = () => {
           eventData.map((event, index) => (
             <li key={event.id ? event.id : index} className="event-item">
               <h3>{event.title}</h3>
-              <p>{formatDateTime(event.start)} - {formatDateTime(event.end)}</p>
+              <p>Starts: {formatDateTime(event.start)} {" - "} Ends: {formatDateTime(event.end)}</p>
               <p>Location: {event.location}</p>
+              {event.allDay && <p>All Day Event</p>}
+              {event.isPriority && <p>Priority Event</p>}
               <p>{event.description}</p>
               <p>Invited Users:</p>
               <ul className="invited-users">
@@ -76,8 +82,9 @@ const Profile = () => {
                   <li key={userIndex}>{user}</li>
                 ))}
               </ul>
+              <p>Date Created: {formatDateTime(event.dateCreated)}</p>
               <button className="editBtn" onClick={() => handleEdit(event)}>Edit</button>
-              <button className="deleteBtn" onClick={() => handleDelete(event.id)}>Delete</button>
+              <button className="deleteBtn" onClick={() => handleDelete(event._id)}>Delete</button>
             </li>
           ))
         ) : (

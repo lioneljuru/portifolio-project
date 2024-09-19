@@ -13,24 +13,27 @@ import Profile from './pages/Profile';
 import CalendarPage from './pages/CalendarPage';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+//import './styles/App.css'
 
 export default function App() {
   return (
-    <div>
+    <div className="App-container">
       <BrowserRouter>
         <AuthProvider>
           <EventProvider>
             <Header />
-            <Routes>
-              {/* Public routes */}
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Signup />} />
+            <main className="App-content">
+              <Routes>
+                {/* Public routes */}
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Signup />} />
 
-              {/* Private routes */}
-              <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
-              <Route path="/calendar" element={<PrivateRoute><CalendarPage /></PrivateRoute>} />
-              <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
-            </Routes>
+                {/* Private routes */}
+                <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
+                <Route path="/calendar" element={<PrivateRoute><CalendarPage /></PrivateRoute>} />
+                <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+              </Routes>
+            </main>
             <Footer />
             <ToastContainer />
           </EventProvider>
