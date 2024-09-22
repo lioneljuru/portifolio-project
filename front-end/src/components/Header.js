@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
+import logo from '../assets/favicon.png';
 import '../styles/Header.css'; // For optional styling
 
 function Header() {
@@ -16,7 +17,9 @@ function Header() {
     <header className="header">
       <nav className="navbar">
         <div className="logo">
-          <h2>SCHEDULY</h2>
+          <Link to="/">
+            <img src={logo} alt="Scheduly Logo" />
+          </Link>
         </div>
         <div className="hamburger" onClick={toggleMenu}>
           <div></div>
@@ -25,7 +28,7 @@ function Header() {
         </div>
         <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
           </li>
           <li>
             <Link to="/profile">Profile</Link>
@@ -35,7 +38,7 @@ function Header() {
           </li>
           {/* Show user info and logout if logged in */}
           {user ? (
-            <li>
+            <li className='logout'>
               {/*<span>Welcome, {user.username}!</span>*/}
               <button onClick={logout}>Logout</button>
             </li>

@@ -2,7 +2,7 @@
 .home {
     max-width: 800px;
     margin: 0 auto;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
     padding: 20px;
     font-family: 'Arial', sans-serif;
     background-color: #f0f2f5;
@@ -12,7 +12,6 @@
 
 .home h2 {
     text-align: center;
-    color: #333;
     margin-bottom: 20px;
     font-size: 2.5em;
     /* Increased font size */
@@ -21,14 +20,13 @@
 }
 
 .searchBtn {
+    color: #2c3e50;
     width: 100%;
     padding: 12px;
-    /* Increased padding */
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 18px;
-    /* Increased font size */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
 }
@@ -38,56 +36,62 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-ul {
+.home__ul {
     list-style-type: none;
     padding: 0;
 }
 
-li {
+.home__ul li {
     background-color: #fff;
     margin-bottom: 15px;
     padding: 20px;
     /* Increased padding */
-    border-radius: 8px;
+    border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-li:hover {
+.home__ul li:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-li h3 {
+.home__ul li h3 {
     font-size: 1.8em;
     /* Increased font size */
     color: #2c3e50;
     margin-bottom: 10px;
 }
 
-li p {
+.home__ul li p {
     margin: 5px 0;
-    color: #555;
-    font-size: 1.2em;
+    color: #2c3e50;
+    font-size: 1em;
     /* Increased font size */
 }
 
-li p:first-of-type {
+.home__ul li p:first-of-type {
     font-weight: bold;
     color: #e74c3c;
 }
 
-li p:last-of-type {
+.home__ul li p:last-of-type {
     font-style: italic;
     color: #8e44ad;
 }
 
-.invited-users {
+.home__ul .no_event {
+    font-size: 1.2em;
+    text-align: center;
+    color: #2c3e50;
+}
+
+.home__ul .invited-users {
     margin-top: 10px;
     padding-left: 20px;
 }
 
-.invited-users li {
+.home__ul .invited-users li {
     font-size: 1em;
     /* Increased font size */
     color: #777;
@@ -103,17 +107,17 @@ li p:last-of-type {
         /* Adjusted font size */
     }
 
-    li {
+    .home__ul li {
         padding: 15px;
         /* Adjusted padding */
     }
 
-    li h3 {
+    .home__ul li h3 {
         font-size: 1.5em;
         /* Adjusted font size */
     }
 
-    li p {
+    .home__ul li p {
         font-size: 1em;
         /* Adjusted font size */
     }

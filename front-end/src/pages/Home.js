@@ -26,7 +26,7 @@ function Home() {
     <div className="home">
       <h2>Upcoming Events</h2>
       <input id='searchEvent' name='searchEvent' type="text" placeholder="Search Events" value={searchQuery} onChange={handleSearch} className='searchBtn' />
-      <ul>
+      <ul className='home__ul'>
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event, index) => (
             <li key={event.id ? event.id : index} className="event-item">
@@ -46,7 +46,7 @@ function Home() {
             </li>
           ))
         ) : (
-          <p>No events available. Enjoy the silence.</p>
+          <p className='no_event'>No events. Enjoy the silence.</p>
         )}
       </ul>
     </div>

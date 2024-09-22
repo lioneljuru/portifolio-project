@@ -11,9 +11,10 @@ import { EventProvider } from './context/EventContext';
 import PrivateRoute from './components/PrivateRoute';
 import Profile from './pages/Profile';
 import CalendarPage from './pages/CalendarPage';
+import LandingPage from "./pages/LandingPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import './styles/App.css'
+import './styles/App.css'
 
 export default function App() {
   return (
@@ -27,9 +28,10 @@ export default function App() {
                 {/* Public routes */}
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Signup />} />
+                <Route path='/' element={<LandingPage />} />
 
                 {/* Private routes */}
-                <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
+                <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
                 <Route path="/calendar" element={<PrivateRoute><CalendarPage /></PrivateRoute>} />
                 <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
               </Routes>
