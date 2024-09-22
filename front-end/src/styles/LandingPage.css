@@ -1,0 +1,121 @@
+.landing__header {
+    background: url(../assets/scheduly\ cover\ page3.jpg);
+    background-size: cover;
+    height: auto;
+}
+
+.landing__header__text {
+    padding: 10px 0px 10px 100px;
+    width: 300px;
+    line-height: 50px;
+    color: #2a2438;
+    font-size: 18px;
+}
+
+.landing__header__text p {
+    margin-top: 20px;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.landing__head__color {
+    color: #6660EF;
+}
+
+.landing__main {
+    background-color: #eeebf3;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+    height: 100%;
+}
+
+.landing__main__header {
+    padding: 20px 0px 20px 0px;
+}
+
+.landing__main__header > h1 {
+    /*padding-bottom: 15px;*/
+    margin-bottom: 0;
+}
+
+.landing__main__header > p {
+    margin-top: 0;
+    padding-top: 10px;
+    margin-bottom: 0
+}
+
+.landing__zone {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: auto;
+    color: #FFF;
+    /* font-size: 2em; */
+    border-radius: 10px;
+    /* border: 1px solid #bbb; */
+    trasition: all 0.3s linear;
+}
+
+.landing__box {
+    background: #352f44;
+    width: 200px;
+    padding: 50px;
+
+}
+
+.landing__box img {
+    height: 60px;
+    width: 60px;
+    float: left;
+}
+
+.landing__box p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*GRID*/
+.landing__grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* grid-template-columns: 1fr 100px; */
+    grid-gap: 30px;
+    padding: 20px;
+}
+
+.landing__footer {
+    background-color: #8b85f5;
+    color: #2a2438;
+    text-align: center;
+    line-height: 50px;
+    padding: 50px;
+}
+
+.landing__footer_container p {
+    margin: 0;
+    font-size: 20px;
+}
+
+.landing__footer_container h1 {
+    margin-bottom: 0;
+}
+
+.explore_button {
+    color: #2a2438;
+}
+
+.explore_button > a {
+    text-decoration: none;
+    background-color: #dbd8e3;
+    color: #2a2438;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.explore_button a:hover {
+    background-color: #2a2438;
+    color: #dbd8e3;
+}

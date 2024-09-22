@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { toast } from "react-toastify";
+import handleCrudError from "../components/handleCrudError";
 
 // Create the AuthContext
 export const AuthContext = createContext();
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }) => {
       setUser(userData); // If signup is successful, store the user object
       localStorage.setItem('user', JSON.stringify(userData));
       toast.success('Signup successful!');
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       let errorMessage = 'Something went wrong, please try again';
       if (error.response) {
@@ -66,7 +67,7 @@ export const AuthProvider = ({ children }) => {
       setUser(userData); // If login is successful, store the user object
       localStorage.setItem('user', JSON.stringify(userData));
       toast.success(response.data.message);
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       let errorMessage = 'Something went wrong, please try again';
       if (error.response) {
@@ -86,22 +87,12 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await axios.post('/auth/logout');
-      setUser(null); // If logout is successful, remove the user object
-      localStorage.removeItem('user'); // Remove user data from localStorage
+      setUser(null);
+      localStorage.removeItem('user');
       toast.success('Logout successful!');
       navigate('/login');
     } catch (error) {
-      let errorMessage = 'Something went wrong, please try again';
-      if (error.response) {
-        // The server responded with a status code outside the range of 2xx
-        errorMessage = error.response.data.error || `Error ${error.response.status}: ${error.response.statusText}`;
-      } else if (error.request) {
-        //  Handle network errors, The request was made but no response was received
-        errorMessage = "No response from the server, please try again";
-      }
-      // Something happened in setting up the request that triggered an Error
-      toast.error(errorMessage);
-      //throw error;
+      handleCrudError(error);
     };
   };
 

@@ -228,7 +228,7 @@ button {
     z-index: -1;
 }
 
-.error-message {
+.event-form .error-message {
     color: #f44336;
     font-size: 16px;
     /*margin-top: 2px;*/

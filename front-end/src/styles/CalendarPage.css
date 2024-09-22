@@ -2,33 +2,21 @@
 
 .calendar {
     max-width: 1200px;
-    /* Set a maximum width for the calendar container */
     margin: 0 auto;
-    /* Center the calendar container */
     padding: 20px;
-    /* Add some padding around the calendar */
     background-color: #f9f9f9;
-    /* Set a background color */
     border-radius: 8px;
-    /* Add rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Add a subtle shadow */
 }
 
 .calendar h1 {
     text-align: center;
-    /* Center the heading */
     margin-bottom: 20px;
-    /* Add some space below the heading */
     font-size: 2em;
-    /* Increase the font size */
     color: #333;
-    /* Set the text color */
 }
 
 .fc {
     max-height: 80vh;
-    /* Set a maximum height for the calendar */
     overflow-y: auto;
-    /* Enable vertical scrolling if needed */
 }

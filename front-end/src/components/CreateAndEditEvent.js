@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../styles/CreateAndEditEvent.css';
 
 const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete }) => {
@@ -29,8 +29,8 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) return setError('Title is required');
-    if (!start.trim()) return setError('Start date and time is required');
-    if (!end.trim()) return setError('End date and time is required');
+    if (!start) return setError('Start date and time is required');
+    if (!end) return setError('End date and time is required');
     if (new Date(start) >= new Date(end)) return setError('End date and time must be after start date and time');
     setError(null);
     const newEvent = { title, start, end, allDay, isPriority, location, invitedUsers, description };
@@ -38,6 +38,11 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
       newEvent._id = event._id; // Include the event ID if in edit mode
     }
     onSubmit(newEvent);
+  };
+
+  const handleInputChange = (setter) => (e) => {
+    setter(e.target.value);
+    if (error) setError(null);
   };
 
   return (
@@ -53,8 +58,7 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
               <input
                 type="text"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
+                onChange={handleInputChange(setTitle)}
               />
             </div>
             <div className="form-group">
@@ -62,7 +66,7 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
               <input
                 type="text"
                 value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                onChange={handleInputChange(setLocation)}
               />
             </div>
           </div>
@@ -73,8 +77,7 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
               <input
                 type="datetime-local"
                 value={start}
-                onChange={(e) => setStart(e.target.value)}
-                required
+                onChange={handleInputChange(setStart)}
               />
             </div>
             <div className="form-group">
@@ -82,8 +85,7 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
               <input
                 type="datetime-local"
                 value={end}
-                onChange={(e) => setEnd(e.target.value)}
-                required
+                onChange={handleInputChange(setEnd)}
               />
             </div>
           </div>
@@ -113,7 +115,7 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
               <input
                 type="text"
                 value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
+                onChange={handleInputChange(setUserInput)}
                 placeholder="Enter email"
               />
               <button type="button" onClick={addUser}>Add</button>
@@ -134,7 +136,7 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
             <label>Description</label>
             <textarea
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={handleInputChange(setDescription)}
             ></textarea>
           </div>
 

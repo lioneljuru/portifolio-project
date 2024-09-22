@@ -22,6 +22,8 @@ const Profile = () => {
 
   const handleDelete = (eventId) => {
     deleteEvent(eventId);
+    setIsCreating(false);
+    setEditingEvent(null);
   };
 
   const handleSubmit = (event) => {
@@ -44,12 +46,22 @@ const Profile = () => {
     if (isNaN(date.getTime())) {
       return 'Invalid Date';
     }
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    
+    const options = {
+      //year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    };
+
+    return date.toLocaleString('en-US', options);
   };
 
   return (
     <div className="profile">
-      <h2>{user.email}</h2>
+      <h2 className='email'>{user.email}</h2>
       <p>@{user.name}</p>
       <h2>My Events</h2>
       <button className="createBtn" onClick={handleCreate}>Create Event</button>
@@ -61,7 +73,7 @@ const Profile = () => {
               event={editingEvent}
               onSubmit={handleSubmit}
               onCancel={handleClose}
-              onDelete={() => handleDelete(editingEvent.id)}
+              onDelete={() => handleDelete(editingEvent._id)}
             />
           </div>
         </div>
@@ -88,7 +100,7 @@ const Profile = () => {
             </li>
           ))
         ) : (
-          <p>No events available. Enjoy the Silence</p>
+          <p className='no_event'>No events. Enjoy the Silence</p>
         )}
       </ul>
     </div>
