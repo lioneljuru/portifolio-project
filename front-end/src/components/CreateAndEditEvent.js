@@ -36,6 +36,8 @@ const CreateAndEditEvent = ({ isEditMode, event, onSubmit, onCancel, onDelete })
     const newEvent = { title, start, end, allDay, isPriority, location, invitedUsers, description };
     if (isEditMode && event) {
       newEvent._id = event._id; // Include the event ID if in edit mode
+      newEvent.createdBy = event.createdBy;
+      newEvent.dateCreated = event.dateCreated;
     }
     onSubmit(newEvent);
   };
