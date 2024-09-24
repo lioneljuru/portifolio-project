@@ -28,7 +28,7 @@ const Profile = () => {
 
   const handleSubmit = (event) => {
     if (editingEvent) {
-      updateEvent({ ...event, _id: editingEvent._id });
+      updateEvent(event);
     } else {
       createEvent(event);
     }
@@ -46,7 +46,7 @@ const Profile = () => {
     if (isNaN(date.getTime())) {
       return 'Invalid Date';
     }
-    
+
     const options = {
       //year: 'numeric',
       month: 'long',
@@ -58,6 +58,8 @@ const Profile = () => {
 
     return date.toLocaleString('en-US', options);
   };
+
+  const userEvents = eventData.filter(event => event.createdBy === user.id);
 
   return (
     <div className="profile">
@@ -79,8 +81,8 @@ const Profile = () => {
         </div>
       )}
       <ul className="event-list">
-        {eventData.length > 0 ? (
-          eventData.map((event, index) => (
+        {userEvents.length > 0 ? (
+          userEvents.map((event, index) => (
             <li key={event.id ? event.id : index} className="event-item">
               <h3>{event.title}</h3>
               <p>Starts: {formatDateTime(event.start)} {" - "} Ends: {formatDateTime(event.end)}</p>

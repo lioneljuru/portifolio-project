@@ -19,7 +19,17 @@ function Home() {
     if (isNaN(date.getTime())) {
       return 'Invalid Date';
     }
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+    const options = {
+      //year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    };
+
+    return date.toLocaleString('en-US', options);
   };
 
   return (
@@ -31,7 +41,7 @@ function Home() {
           filteredEvents.map((event, index) => (
             <li key={event.id ? event.id : index} className="event-item">
               <h3>{event.title}</h3>
-              <p>Starts: {formatDateTime(event.start)} Ends: {formatDateTime(event.end)}</p>
+              <p>Starts: {formatDateTime(event.start)} - Ends: {formatDateTime(event.end)}</p>
               <p>Location: {event.location}</p>
               {event.allDay && <p>All Day Event</p>}
               {event.isPriority && <p>Priority Event</p>}
