@@ -11,6 +11,8 @@ can see or RSVP to the events``
 3. Event Management
 4. RSVP Functionality
 5. Error Handling
+6. Environment variables
+7. Installation Guide
 
 ### Project Overview
 
@@ -44,6 +46,8 @@ Only invited users can RSVP to an event, and they can also cancel their RSVPs.
 1. RSVP to an Event
 2. Cancel an RSVP
 
+* For documentation of the API, please [click here](./backend/apidocs.md)
+
 ### Error Handling
 
 It returns descriptive error messages for various scenarios, including
@@ -73,7 +77,7 @@ The app requires several environment variables to be set in a .env file:
 | PORT | Port number for the server |
 | HOST | MongoDB connection string |
 
-### How to Install
+### Installation Guide
 
 After cloning this repository in your local machine, please follow these steps in these order to get the app running:
 
