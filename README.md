@@ -88,7 +88,7 @@ migrate to the backend repository and run ```npm install``` to install all depen
 make sure mongodb is running on your PC (to start you can use ```sudo service mongod start``` on ubuntu distro of linux. please find the equilvalent of your OS)
 
 #### Step 3:
-Once every mongoDb is running successfully, start the express server: ```npm run start-dev``` for development with nodemon or ```npm run start``` for deployment. it should show the port and hostname , example:
+Once mongoDb is running successfully, start the express server: ```npm run start-dev``` for development with nodemon or ```npm run start``` for deployment. it should show the port and hostname , example:
 ```
    ifyzi@ifyzi:~/scheduly/backend$
          server is running on http://localhost:3003
