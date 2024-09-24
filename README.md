@@ -47,7 +47,7 @@ Only invited users can RSVP to an event, and they can also cancel their RSVPs.
 ### Error Handling
 
 It returns descriptive error messages for various scenarios, including
-authentication errors, missing resources, and invalid input. Below are common 
+authentication errors, missing resources, and invalid input. Below are common
 error responses:
 1. Authentication Errors
    * 401 Unauthorized: Returned is user tries to access a protected route without being authenticated
@@ -72,6 +72,36 @@ The app requires several environment variables to be set in a .env file:
 | SESSIONSECRET | Secret key for session management |
 | PORT | Port number for the server |
 | HOST | MongoDB connection string |
+
+### How to Install
+
+After cloning this repository in your local machine, please follow these steps in these order to get the app running:
+
+#### Step 1:
+migrate to the backend repository and run ```npm install``` to install all dependencies
+
+#### Step 2:
+make sure mongodb is running on your PC (to start you can use ```sudo service mongod start``` on ubuntu distro of linux. please find the equilvalent of your OS)
+
+#### Step 3:
+Once every mongoDb is running successfully, start the express server: ```npm run start-dev``` for development with nodemon or ```npm run start``` for deployment. it should show the port and hostname , example:
+```
+   ifyzi@ifyzi:~/scheduly/backend$
+         server is running on http://localhost:3003
+         connected to database
+```
+
+#### Step 4:
+Migrate to the front-end directory and install the dependecies
+```npm install```
+
+#### Step 5:
+Start the react server:
+```npm run start```
+
+#### Step 6:
+Navigate to your browser and enter your hostname and the port 3000, example:
+```http://localhost:3000/```
 
 ### Conclusion
 Scheduly provides a robust system for creating, managing, and RSVPing to events
