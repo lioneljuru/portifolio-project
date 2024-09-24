@@ -9,7 +9,7 @@ export const EventContext = createContext();
 
 //Create EventProvider component to wrap around the components and provide event-related data
 export const EventProvider = ({ children }) => {
-  const {isAuthenticated} = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const [eventData, setEventData] = useState([]); // This will store all the events
 
   // Load events from localStorage when the component mounts
@@ -42,7 +42,7 @@ export const EventProvider = ({ children }) => {
   //localStorage.removeItem('events');
   //console.log('Events ', localStorage.getItem('events'));
   //localStorage.removeItem('user');
-  //console.log(localStorage.getItem('user'));
+  console.log(localStorage.getItem('user'));
 
   // CRUD operations
   // Function to create a new event

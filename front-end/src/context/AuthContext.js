@@ -25,10 +25,7 @@ export const AuthProvider = ({ children }) => {
   // Function to handle user signup
   const signup = async (email, firstname, lastname, dob, password) => {
     try {
-      const response = await axios.post('/auth/signup', { email, firstname, lastname, dob, password });
-      const userData = response.data.user;
-      setUser(userData); // If signup is successful, store the user object
-      localStorage.setItem('user', JSON.stringify(userData));
+      await axios.post('/auth/signup', { email, firstname, lastname, dob, password });
       toast.success('Signup successful!');
       navigate('/login');
     } catch (error) {
