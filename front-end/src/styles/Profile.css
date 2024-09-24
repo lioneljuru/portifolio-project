@@ -48,7 +48,7 @@
 .event-list .no_event {
     font-size: 1.2em;
     text-align: center;
-    color: #2c3e50;
+    color: #2a2438;
 }
 
 .event-item {
@@ -83,7 +83,7 @@
 
 .event-item p {
     margin: 5px 0;
-    color: #2c3e50;
+    color: #2a2438;
     font-size: 1.1em;
 }
 
@@ -147,4 +147,26 @@
     font-size: 24px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.invited-users {
+    list-style-type: none;
+    margin: 5px 0;
+    display: flex;
+    gap: 5px;
+    padding-left: 20px;
+}
+
+.invited-users li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 5px;
+    color: #2a2438;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.invited-users li:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
