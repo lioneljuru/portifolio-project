@@ -1,51 +1,47 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { EventContext } from '../context/EventContext';
+import CreateAndEditEvent from '../components/CreateAndEditEvent';
+import EventCalendarModal from '../components/EventCalendarModal';
 import '../styles/CalendarPage.css';
 
 export default function CalendarPage() {
-  const { eventData } = useContext(EventContext);
+  const { eventData, createEvent } = useContext(EventContext);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [clickedDate, setClickedDate] = useState(null);
+  const [isCreating, setIsCreating] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  /* const handleDateClick = (info) => {
-     // Prompt user to add a new event or  Example of clicking a date to add an event
-     const title = prompt('Event Title:');
-     if (title) {
-       setEvents([...events, { title, date: info.dateStr }]);
-     }
-   };
- 
-   const handleEventDrop = (info) => {
-     // Update the event date when dropped
-     const updatedEvents = events.map((event) => {
-       if (event.title === info.event.title) {
-         return { ...event, date: info.event.startStr };
-       }
-       return event;
-     });
-     setEvents(updatedEvents);
-   };
- 
-   const handleEventClick = (info) => {
-     // Delete event when clicked
-     const updatedEvents = events.filter((event) => event.title !== info.event.title);
-     setEvents(updatedEvents);
-   };
+  // Handle event click in FullCalendar
+  const handleEventClick = (clickInfo) => {
+    setSelectedEvent(clickInfo.event);
+    setShowModal(true); // Show modal when event is clicked
+  };
 
+  // Handle date click for creating new event
   const handleDateClick = (info) => {
-    alert('Date clicked: ' + info.dateStr);
+    const clickedDateTime = `${info.dateStr}T00:00`;
+    setSelectedEvent(null);
+    setClickedDate(clickedDateTime);
+    setIsCreating(true);
+    setShowModal(true);
   };
 
-  const handleEventClick = (info) => {
-    alert('Event clicked: ' + info.event.title);
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedEvent(null);
+    setClickedDate(null);
+    setIsCreating(false);
   };
 
-  const handleEventDrop = (info) => {
-    alert(info.event.title + ' was dropped on ' + info.event.start.toISOString());
-  };*/
+  const handleSubmit = (event) => {
+    createEvent(event);
+    handleCloseModal(); // Close modal after submission
+  };
 
 
   return (
@@ -56,8 +52,8 @@ export default function CalendarPage() {
           plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]} //  Add desired plugins
           initialView='dayGridMonth' // Default view (e.g., month view)
           events={eventData} // Events to display
-          //dateClick={handleDateClick} // Handle clicks on dates
-          //eventClick={handleEventClick} // Handle clicks on events
+          dateClick={handleDateClick} // Handle clicks on dates
+          eventClick={handleEventClick} // Handle clicks on events
           //eventDrop={handleEventDrop} // Handle event drops
           editable={true} // Allows drag and drop
           selectable={true} // Allows selection of dates
@@ -67,6 +63,23 @@ export default function CalendarPage() {
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
           }}  // Add buttons to change view
         />
+
+
+        {showModal && (
+          isCreating ? (
+            <CreateAndEditEvent
+              isEditMode={false}
+              clickedDate={clickedDate}
+              onSubmit={handleSubmit}
+              onCancel={handleCloseModal}
+            />
+          ) : (
+            <EventCalendarModal
+              event={selectedEvent}
+              onClose={handleCloseModal}
+            />
+          )
+        )}
       </div>
     </div>
   );

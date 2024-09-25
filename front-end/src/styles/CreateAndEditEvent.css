@@ -132,8 +132,9 @@ input[type="checkbox"] {
 .invited-list {
     display: flex;
     gap: 10px;
-    margin-top: 10px;
+    margin: 10px 0;
     flex-wrap: wrap;
+    padding-left: 5px;
 }
 
 /* Style for each invited user */
