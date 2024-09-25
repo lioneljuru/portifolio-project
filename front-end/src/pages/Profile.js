@@ -89,8 +89,8 @@ const Profile = () => {
               <p>Location: {event.location}</p>
               {event.allDay && <p>All Day Event</p>}
               {event.isPriority && <p>Priority Event</p>}
-              <p>{event.description}</p>
-              <p>Invited Users:</p>
+              {event.description && <p>Description: {event.description}</p>}
+              {event.invitedUsers.length > 0 && <p>Invited Users:</p>}
               <ul className="invited-users">
                 {event.invitedUsers.map((user, userIndex) => (
                   <li key={userIndex}>{user}</li>
